@@ -13,6 +13,8 @@ class Cloacker
         $this->save_headers();
         //execute save users ip
         $this->save_users_ip();
+        //execute save crawler ip
+        $this->save_crawler_ip();
 
     }
 
@@ -130,10 +132,13 @@ class Cloacker
     //save new crawler ip in a file
     public function save_crawler_ip()
     {
-        $ip = $this->get_ip();
-        $myfile = fopen("./crawler_ip.log", "w") or die("Unable to open file!");
-        fwrite($myfile, $ip->ip);
-        fclose($myfile);
+        //if is crawler save ip in a file
+        if ($this->is_crawler == "Crawler detected") {
+            $ip = $this->get_ip();
+            $myfile = fopen("./crawler_ip.log", "w") or die("Unable to open file!");
+            fwrite($myfile, $ip->ip);
+            fclose($myfile);
+        }
     }
 
 
