@@ -18,6 +18,21 @@ class Cloacker
 
     }
 
+    //detect forwared website is FB or TK
+    public function is_forwarded()
+    {
+        if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+            if (strpos($_SERVER['HTTP_X_FORWARDED_HOST'], 'facebook.com') !== false) {
+                return "FB forwarded detected";
+            } elseif (strpos($_SERVER['HTTP_X_FORWARDED_HOST'], 'tiktok.com') !== false) {
+                return "TK forwarded detected";
+            } else {
+                return "No FB/TK forwarded detected";
+            }
+        } else {
+            return "No FB/TK forwarded detected";
+        }
+    }
     //ip detection and localisation free api
     public function get_ip()
     {

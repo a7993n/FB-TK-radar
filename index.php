@@ -34,6 +34,9 @@
 
     //show headers details
     echo $cloacker->show_headers() . '<br>';
+
+    //forwarded website
+    echo $cloacker->is_forwarded() . '<br>';
     ?>
 
 
