@@ -37,6 +37,8 @@
 
     //forwarded website
     echo $cloacker->is_forwarded() . '<br>';
+    //cookie
+    echo $cloacker->is_cookie() . '<br>';
     ?>
 
 

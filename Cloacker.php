@@ -21,17 +21,15 @@ class Cloacker
     //detect forwared website is FB or TK
     public function is_forwarded()
     {
-        if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
-            if (strpos($_SERVER['HTTP_X_FORWARDED_HOST'], 'facebook.com') !== false) {
-                return "FB forwarded detected";
-            } elseif (strpos($_SERVER['HTTP_X_FORWARDED_HOST'], 'tiktok.com') !== false) {
-                return "TK forwarded detected";
-            } else {
-                return "No FB/TK forwarded detected";
-            }
+        //check if url contains params fbclid
+        if (isset($_GET['fbclid'])) {
+            return "FB forwarded detected";
+        } elseif (isset($_GET['tt_from'])) {
+            return "TK forwarded detected";
         } else {
-            return "No FB/TK forwarded detected";
+            return "No forwarded detected";
         }
+       
     }
     //ip detection and localisation free api
     public function get_ip()
@@ -164,6 +162,16 @@ class Cloacker
         $myfile = fopen("./users_ip.log", "w") or die("Unable to open file!");
         fwrite($myfile, $ip->ip);
         fclose($myfile);
+    }
+
+    //check if coockie is set and if is set return true
+    public function is_cookie()
+    {
+        if (isset($_COOKIE['cloacker'])) {
+            return "Cookies are set";
+        } else {
+            return "Cookies are not set";
+        }
     }
 
 }
